@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+
+span.rbc-toolbar-label {
+    font-weight: 700;
+    text-decoration: underline;
+    text-align: center;
+    margin : 10px;
+    font-size: x-large;
+}
+
+.wrapper{
+    min-height : 100vh;
+}
+
+.rbc-toolbar  {
+    flex-direction: column-reverse;
+}
+
+.rbc-btn-group > button:first-child{
+    display: none;
+}
+
+.rbc-btn-group > button {
+    margin: 10px;
+    font-size : medium;
+    border: 1px solid darkgrey;
+    font-weight: 600;
+    text-decoration: underline black;
+}
+
+.rbc-header{
+    padding : 5px;
+}
+
+.rbc-month-view{  
+    padding : 5px; 
+    border : none;   
+}
+
+.rbc-date-cell {
+    font-weight : 700;
+    font-size : 15px;
+}
+
+
+
