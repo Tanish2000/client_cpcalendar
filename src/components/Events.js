@@ -1,6 +1,7 @@
 import React from 'react';
 import Codechef from '../images/codechef.svg'
 import Codeforces from '../images/codeforces.png'
+import Leetcode from '../images/leetcode.svg'
 
 const Events = (props) => {
 
@@ -11,7 +12,7 @@ const Events = (props) => {
         },
         wrapper: {
             fontFamily: `'New Tegomin', serif`,
-            fontSize : '19px'
+            fontSize: '19px'
         },
     }
 
@@ -22,16 +23,15 @@ const Events = (props) => {
             <div className="row align-items-center justify-content-around">
                 {events.map((e) => {
                     return (
-                        <div key={e._id} className="col-md-5 col-11 p-2 p-md-3 m-md-2 mt-2 shadow-lg rounded" style={{ backgroundColor: e.hex_color }}>
+                        <div key={e._id} className="col-md-5 col-11 p-2 m-md-2 m-1 shadow-lg rounded" style={{ backgroundColor: e.hex_color }}>
                             <div className="d-flex align-items-center justify-content-start row">
                                 <div className="col-3">
-                                    <img src={e.platform === "Codechef" ? Codechef : Codeforces} style={styles.icon} alt="event" className="px-3" />
+                                    <img src={e.platform === "Codechef" ? Codechef : e.platform === "Leetcode" ? Leetcode : Codeforces} style={styles.icon} alt="event" className="px-3" />
                                 </div>
                                 <div className="col-9">
-                                    <span className="text-white">{e.title}</span>
+                                    <span className="text-light">{e.title}</span>
                                     <br />
-                                    <span className="text-white h6">{e.start}</span>
-                                    
+                                    <span className="text-light">{e.start}<br /><span>{e.platform === "Leetcode" ? e.start_time : ""}</span></span>
                                 </div>
                             </div>
                         </div>

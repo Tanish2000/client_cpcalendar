@@ -103,6 +103,7 @@ const TimeTable = () => {
         pauseOnHover
         className="px-4 px-md-0 py-3"
       />
+      <h6 className="text-center p-4 text-muted">Tap / Click on the events in the calander for complete details.</h6>
       <Events events={contests} />
     </div>
   )
