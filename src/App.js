@@ -10,19 +10,27 @@ import './App.css';
 function App() {
 
   const styles = {
-    main_div  : {
-      backgroundColor: 'azure'
+    main_div: {
+      backgroundColor: 'azure',
+      margin: '0 !important',
+      padding: '0 !important'
     }
   }
 
-  
+
   return (
-    <div style={styles.main_div}>
+    <div className="container-fluid" style={styles.main_div}>
       <Header />
       <Tags />
       <TimeTable />
-      <UpcomingFeatures />
-      <Note />
+      <div className="d-flex row mx-0 flex-wrap align-items-center justify-content-around">
+        <div className="col-12 col-xl-6">
+          <UpcomingFeatures />
+        </div>
+        <div className="col-12 col-xl-6">
+          <Note />
+        </div>
+      </div>
       <Aboutme />
     </div>
   );

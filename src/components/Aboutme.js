@@ -4,6 +4,9 @@ import Heart from '../images/hearts.svg'
 
 const Aboutme = () => {
     const styles = {
+        events : {
+            margin : '0'
+        },
         img: {
             height: 'auto',
             maxWidth: '65px',
@@ -22,8 +25,8 @@ const Aboutme = () => {
         }
     }
     return (
-        <div className="container bg-dark mt-md-2">
-            <div className="row py-2">
+        <div className="bg-dark mt-md-2">
+            <div className="row py-2 mx-0">
                 <div className="col-12 col-md-4 d-flex  justify-content-center align-items-center p-1">
                     <img src={Avatar} alt="" style={styles.img} className="m-2 mx-md-3" />
                     <div>

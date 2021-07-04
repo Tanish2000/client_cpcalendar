@@ -16,7 +16,7 @@ const Tags = () => {
     }
 
     return (
-        <div className="container d-flex align-items-center justify-content-center flex-wrap">
+        <div className="d-flex align-items-center justify-content-center flex-wrap">
             <span><b><u>Events</u></b>:</span>
             <div className="d-flex align-items-center justify-content-center mx-2 rounded p-md-1 my-1" style={{backgroundColor : '#A0522D'}}>
                 <img src={Codechef} alt="" style={styles.icon} />

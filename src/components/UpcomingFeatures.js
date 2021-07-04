@@ -1,4 +1,5 @@
 import React from 'react';
+import Rocket from '../images/rocket.svg'
 
 const UpcomingFeatures = () => {
     const styles = {
@@ -6,43 +7,41 @@ const UpcomingFeatures = () => {
             fontFamily: `'Nunito Sans', sans-serif`,
             fontSize: '19px'
         },
-        icon: {
-            height: 'auto',
-            width: '40%',
-            margin : '20px auto'
+        list : {
+            // transform : 'translateY(20px)'
         },
+        background : {
+            color : 'black'
+        },
+
     }
     const UpcomingFeatures = [
         {
-            id: 1,
-            text: `Adding support of different platforms like Leetcode, Hackerearth, Hackerrank, etc.`
+            text: `Adding support of different platforms like Hackerearth, Hackerrank, etc.`
         },
         {
-            id: 2,
             text: `Push notifications service for the upcoming contest on differnet platforms.`
         },
         {
-            id: 3,
             text: `Sending alerts through push notifications 30 minutes prior to the contest. `
         },
     ]
     return (
-        <div className="container" style={styles.text}>
-            <div className="row d-flex p-md-4 px-2 pt-4 align-items-center justify-content-center">
-                <div className="col-12 col-md-3 text-center py-3">
-                   <h1><b>Upcoming Features</b></h1>
+        <div className="shadow-lg my-4" style={{backgroundColor : '#C4FFFD'}}>
+            <div className="row d-flex p-md-5 px-2 py-4 align-items-center justify-content-center mx-0">
+                <div className="col-12 text-center">
+                <h3><b>Upcoming Features</b></h3>
                 </div>
-                <div className="col-12 col-md-6" style={styles.text}>
-                    <ul>
-                        {UpcomingFeatures.map((UpcomingFeatures) => {
+                <div className="col-12 text-align-center" style={styles.text}>
+                    <ul style={{ listStyleImage:  `url(${Rocket})` }}>
+                        {UpcomingFeatures.map((feature,index) => {
                             return (
-                                <li className="text-justify m-1" key={UpcomingFeatures.id}>{UpcomingFeatures.text}</li>
+                                <li className="text-justify my-4" key={index} style={styles.list} >{feature.text}</li>
                             )
                         })}
                     </ul>
                 </div>
             </div>
-
         </div>
     )
 }

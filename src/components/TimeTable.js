@@ -12,12 +12,14 @@ import '../App.css';
 const TimeTable = () => {
 
   const [contests, setContest] = useState([]);
+  const [fetchinprogress, setfetchinprogress] = useState(true);
 
   useEffect(() => {
-    axios.get(`https://cpcalendarapi.herokuapp.com/getContestData`)
+    axios.get(`https://api-cpcalendar.herokuapp.com/getContestData`)
       .then(res => {
         const contests = res.data.contests;
         setContest(contests);
+        setfetchinprogress(false)
       })
   }, [])
 
@@ -77,34 +79,52 @@ const TimeTable = () => {
     });
   }
 
+  const CPCalendar = (props) => {
+    return (
+      <div>
+        <Calendar
+          views={['month']}
+          defaultView={'month'}
+          localizer={localizer}
+          events={props.events}
+          onSelectEvent={(e) => handleSelect(e)}
+          style={styles.CalenderStyles}
+          popup
+          eventPropGetter={(e) => handleBgColor(e)}
+          className="my-4"
+        />
+
+        <ToastContainer
+          position="bottom-center"
+          autoClose={12000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          className="px-4 px-md-0 py-3"
+        />
+        <h6 className="text-center p-4 text-muted">Tap / Click on the events in the calander for complete details.</h6>
+        <Events events={props.events} />
+      </div>
+    )
+  }
+
+  const Spiner = () => {
+    return (
+      <div className="container min-vh-100 d-flex align-items-center justify-content-center flex-row">
+        <div className="spinner-grow mx-2" role="status"></div>
+        <div className="spinner-grow text-primary" role="status"></div>
+        <div className="spinner-grow text-danger mx-2" role="status"></div>
+      </div>
+    )
+  }
+
   return (
     <div>
-      <Calendar
-        views={['month']}
-        defaultView={'month'}
-        localizer={localizer}
-        events={contests}
-        onSelectEvent={(e) => handleSelect(e)}
-        style={styles.CalenderStyles}
-        popup
-        eventPropGetter={(e) => handleBgColor(e)}
-        className="my-4"
-      />
-
-      <ToastContainer
-        position="bottom-center"
-        autoClose={12000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        className="px-4 px-md-0 py-3"
-      />
-      <h6 className="text-center p-4 text-muted">Tap / Click on the events in the calander for complete details.</h6>
-      <Events events={contests} />
+      {fetchinprogress ? <Spiner /> : <CPCalendar events={contests} />}
     </div>
   )
 }
