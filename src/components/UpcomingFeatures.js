@@ -7,9 +7,6 @@ const UpcomingFeatures = () => {
             fontFamily: `'Nunito Sans', sans-serif`,
             fontSize: '19px'
         },
-        list : {
-            // transform : 'translateY(20px)'
-        },
         background : {
             color : 'black'
         },
@@ -27,7 +24,7 @@ const UpcomingFeatures = () => {
         },
     ]
     return (
-        <div className="shadow-lg my-4" style={{backgroundColor : '#C4FFFD'}}>
+        <div className="shadow-lg my-4" style={{backgroundColor : '#DEF9F8'}}>
             <div className="row d-flex p-md-5 px-2 py-4 align-items-center justify-content-center mx-0">
                 <div className="col-12 text-center">
                 <h3><b>Upcoming Features</b></h3>
