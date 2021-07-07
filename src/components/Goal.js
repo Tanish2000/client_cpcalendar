@@ -1,4 +1,3 @@
-import Heart from '../images/hearts.svg';
 import Target from '../images/target.svg';
 
 
