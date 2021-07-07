@@ -112,24 +112,19 @@ const TimeTable = () => {
     )
   }
 
-  const Spinner = () => {
+  const Spiner = () => {
     return (
-      <div className="container min-vh-100 d-flex align-items-center justify-content-center flex-column">
-        <div>
-          <div className="spinner-grow mx-2" role="status"></div>
-          <div className="spinner-grow text-primary" role="status"></div>
-          <div className="spinner-grow text-danger mx-2" role="status"></div>
-        </div>
-        <div>
-          <h6 className="py-3">Preparing Calendar for you..</h6>
-        </div>
-      </div >
+      <div className="container min-vh-100 d-flex align-items-center justify-content-center flex-row">
+        <div className="spinner-grow mx-2" role="status"></div>
+        <div className="spinner-grow text-primary" role="status"></div>
+        <div className="spinner-grow text-danger mx-2" role="status"></div>
+      </div>
     )
   }
 
   return (
     <div>
-      {fetchinprogress ? <Spinner /> : <CPCalendar events={contests} />}
+      {fetchinprogress ? <Spiner /> : <CPCalendar events={contests} />}
     </div>
   )
 }

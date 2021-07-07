@@ -5,7 +5,6 @@ import TimeTable from './components/TimeTable';
 import Aboutme from './components/Aboutme';
 import Note from './components/Note';
 import UpcomingFeatures from './components/UpcomingFeatures';
-import Goal from './components/Goal';
 import './App.css';
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
       <Header />
       <Tags />
       <TimeTable />
-      <Goal />
       <div className="d-flex row mx-0 flex-wrap align-items-center justify-content-around">
         <div className="col-12 col-xl-6">
           <UpcomingFeatures />
