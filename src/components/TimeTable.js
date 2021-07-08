@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Target from '../images/target.svg'
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Tags from './Tags';
 import '../App.css';
 
 const TimeTable = () => {
@@ -48,27 +49,38 @@ const TimeTable = () => {
   }
 
 
-  const Msg = (props) => (
+  const Msg = ({message}) => (
     <div className="d-flex flex-column">
       <div className="text-center d-flex align-items-center justify-content-center">
         <img src={Target} alt="" style={styles.icon} />
-        <h5 className="px-2">{props.object.platform}</h5>
+        <h5 className="px-2">{message.platform}</h5>
       </div>
       <div className="d-flex flex-column">
-        <h6 className="text-center mt-2">Contest : {props.object.title}</h6>
-        <h6 className="text-center mt-2">From : {props.object.start}</h6>
-        <h6 className="text-center mt-1">To : {props.object.end}</h6>
-        <h6 className="text-center mt-1">Contest Duration - {props.object.contest_duration ? props.object.contest_duration + ' Hours' : 'NA'}</h6>
+        <div className="text-center" style={styles.titleBox}>
+          <span style={styles.title}>{message.title}</span>
+        </div>
+        <div className="row">
+          <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+            <span style={{ margin: '4px' }}><u>Start</u></span>
+            <span>{message.start}</span>
+            <span style={styles.time}>{message.start_time}</span>
+          </div>
+          <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+            <span style={{ margin: '4px' }}><u>End</u></span>
+            <span>{message.end}</span>
+            <span style={styles.time}>{message.end_time}</span>
+          </div>
+        </div>
       </div>
       <div className="text-italic text-center my-2">
-        <a href={props.object.link} rel="noreferrer" target="_blank">Visit Contest Page</a>
+        <a href={message.link} rel="noreferrer" target="_blank">View Contest page &#x3e;&#x3e;</a>
       </div>
     </div>
   )
 
 
   const handleSelect = (e) => {
-    toast.dark(<Msg object={e} />, {
+    toast.dark(<Msg message={e} />, {
       position: "bottom-center",
       autoClose: 12000,
       hideProgressBar: false,
@@ -82,6 +94,7 @@ const TimeTable = () => {
   const CPCalendar = (props) => {
     return (
       <div>
+        <Tags contest={props.events} />
         <Calendar
           views={['month']}
           defaultView={'month'}
@@ -89,7 +102,7 @@ const TimeTable = () => {
           events={props.events}
           onSelectEvent={(e) => handleSelect(e)}
           style={styles.CalenderStyles}
-          popup
+          popup={true}
           eventPropGetter={(e) => handleBgColor(e)}
           className="my-4"
         />
@@ -121,7 +134,7 @@ const TimeTable = () => {
           <div className="spinner-grow text-danger mx-2" role="status"></div>
         </div>
         <div>
-          <h6 className="py-3">Preparing Calendar for you..</h6>
+          <h6 className="py-3 spinner_text text-center">Preparing Calendar for you..</h6>
         </div>
       </div >
     )

@@ -48,5 +48,28 @@ span.rbc-toolbar-label {
     margin : 0;
 }
 
+.spinner_text {
+    color: black;
+    animation: text_type 1s ease-in-out 3;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 28ch;
+}
+
+@keyframes text_type {
+    0% {
+      width: 0ch;
+    }
+    50% {
+      width: 14ch;
+    }
+    75% {
+      width: 25ch;
+    }
+    100% {
+      width: 28ch;
+    }
+  }
+
 
 
