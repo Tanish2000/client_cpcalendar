@@ -23,7 +23,7 @@ const Tags = ({contest}) => {
             return e.platform === "Codeforces"
         }).length,
         "leetcode": contest.filter((e) => {
-            return e.platform === "leetcode"
+            return e.platform === "Leetcode"
         }).length,
     };
 
