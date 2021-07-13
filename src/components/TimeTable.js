@@ -1,55 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment';
-import axios from 'axios';
-import Events from './Events';
-import { ToastContainer, toast } from 'react-toastify';
-import Target from '../images/target.svg'
-import 'react-toastify/dist/ReactToastify.css';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import Tags from './Tags';
-import '../App.css';
+import React, { useEffect, useState } from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import axios from "axios";
+import Events from "./Events";
+import { ToastContainer, toast } from "react-toastify";
+import Target from "../images/target.svg";
+import "react-toastify/dist/ReactToastify.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import Tags from "./Tags";
+import "../App.css";
 
 const TimeTable = () => {
-
   const [contests, setContest] = useState([]);
   const [fetchinprogress, setfetchinprogress] = useState(true);
 
   useEffect(() => {
-    axios.get(`https://api-cpcalendar.herokuapp.com/getContestData`)
-      .then(res => {
+    axios
+      .get(`https://api-cpcalendar.herokuapp.com/getContestData`)
+      .then((res) => {
         const contests = res.data.contests;
         setContest(contests);
-        setfetchinprogress(false)
-      })
-  }, [])
+        setfetchinprogress(false);
+      });
+  }, []);
 
   const styles = {
     CalenderStyles: {
       height: 550,
-      width: '88%',
-      margin: '10px auto'
+      width: "88%",
+      margin: "10px auto",
     },
     icon: {
-      height: 'auto',
-      width: '10%'
+      height: "auto",
+      width: "10%",
+    },
+    button : {
+      boxShadow : 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
     }
-  }
+  };
 
-  const localizer = momentLocalizer(moment)
-
+  const localizer = momentLocalizer(moment);
 
   const handleBgColor = (e) => {
     var style = {
       backgroundColor: e.hex_color,
     };
     return {
-      style: style
+      style: style,
     };
+  };
+
+  const handleContestPage = (link) => {
+    window.open(link, '_blank', 'noopener , noreferrer')
   }
 
-
-  const Msg = ({message}) => (
+  const Msg = ({ message }) => (
     <div className="d-flex flex-column">
       <div className="text-center d-flex align-items-center justify-content-center">
         <img src={Target} alt="" style={styles.icon} />
@@ -61,23 +66,28 @@ const TimeTable = () => {
         </div>
         <div className="row">
           <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-            <span style={{ margin: '4px' }}><u>Start</u></span>
+            <span style={{ margin: "4px" }}>
+              <u>Start</u>
+            </span>
             <span>{message.start}</span>
             <span style={styles.time}>{message.start_time}</span>
           </div>
           <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-            <span style={{ margin: '4px' }}><u>End</u></span>
+            <span style={{ margin: "4px" }}>
+              <u>End</u>
+            </span>
             <span>{message.end}</span>
             <span style={styles.time}>{message.end_time}</span>
           </div>
         </div>
       </div>
       <div className="text-italic text-center my-2">
-        <a href={message.link} rel="noreferrer" target="_blank">View Contest page &#x3e;&#x3e;</a>
+        <button className="btn btn-danger m-2" onClick={() => handleContestPage(message.link)} style={styles.button}>
+          Visit Contest page
+        </button>
       </div>
     </div>
-  )
-
+  );
 
   const handleSelect = (e) => {
     toast.dark(<Msg message={e} />, {
@@ -87,17 +97,17 @@ const TimeTable = () => {
       closeOnClick: false,
       pauseOnHover: true,
       draggable: true,
-      progress: 0
+      progress: 0,
     });
-  }
+  };
 
   const CPCalendar = (props) => {
     return (
       <div>
         <Tags contest={props.events} />
         <Calendar
-          views={['month']}
-          defaultView={'month'}
+          views={["month"]}
+          defaultView={"month"}
           localizer={localizer}
           events={props.events}
           onSelectEvent={(e) => handleSelect(e)}
@@ -119,11 +129,13 @@ const TimeTable = () => {
           pauseOnHover
           className="px-4 px-md-0 py-3"
         />
-        <h6 className="text-center p-4 text-muted">Tap / Click on the events in the calander for complete details.</h6>
+        <h6 className="text-center p-4 text-muted">
+          Tap / Click on the events in the calander for complete details.
+        </h6>
         <Events events={props.events} />
       </div>
-    )
-  }
+    );
+  };
 
   const Spinner = () => {
     return (
@@ -134,17 +146,19 @@ const TimeTable = () => {
           <div className="spinner-grow text-danger mx-2" role="status"></div>
         </div>
         <div>
-          <h6 className="py-3 spinner_text text-center">Preparing Calendar for you..</h6>
+          <h6 className="py-3 spinner_text text-center">
+            Preparing Calendar for you..
+          </h6>
         </div>
-      </div >
-    )
-  }
+      </div>
+    );
+  };
 
   return (
     <div>
       {fetchinprogress ? <Spinner /> : <CPCalendar events={contests} />}
     </div>
-  )
-}
+  );
+};
 
 export default TimeTable;
