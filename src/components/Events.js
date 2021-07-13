@@ -6,8 +6,8 @@ import Leetcode from '../images/leetcode.svg'
 const Events = (props) => {
 
     const styles = {
-        events : {
-            margin : '0'
+        events: {
+            margin: '0'
         },
         icon: {
             height: 'auto',
@@ -28,20 +28,56 @@ const Events = (props) => {
         time: {
             fontSize: "1.05rem"
         },
-        link : {
-            textDecoration : 'underline',
-            color : 'white'
+        link: {
+            textDecoration: 'underline',
+            color: 'white'
+        },
+        button : {
+            boxShadow : 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
         }
     }
 
     const events = props.events;
 
-    const handleclick = (link) => {
-        window.open(link ,'_blank', 'noopener , noreferrer')
+    const handleContestPage = (link) => {
+        window.open(link, '_blank', 'noopener , noreferrer')
     }
+
+    const handleGoogleCalendar = ({title,start,end,start_time,end_time,link}) => {
+
+        var base_url = "https://calendar.google.com/calendar/u/0/r/eventedit?text=";
+
+        var contest_name = title.trim().replaceAll(" ","+");
+
+        var start_date = new Date(`${start} ${start_time}`);
+        var end_date = new Date(`${end} ${end_time}`);
+
+        start_date.setHours(start_date.getHours() + 5);
+        start_date.setMinutes(start_date.getMinutes() + 30);
+        end_date.setHours(end_date.getHours() + 5);
+        end_date.setMinutes(end_date.getMinutes() + 30);
+
+        start_date = start_date.toISOString();
+        end_date = end_date.toISOString();
+        
+        start_date = start_date.slice(0,10).replaceAll('-','') +  start_date.slice(10,19).replaceAll(':','')
+
+        end_date = end_date.slice(0,10).replaceAll('-','') +  end_date.slice(10,19).replaceAll(':','');
+
+        contest_name = contest_name.replaceAll('#','%23')
+
+        var calendar_url = `${base_url}${contest_name}&dates=${start_date}/${end_date}&location=${link}&&pli=1&uid&sf=true&output=xml%23eventpage_6`;
+
+        window.open(calendar_url , '_blank' , 'noopener , noreferrer');
+
+    }
+
     return (
         <div className="bg-dark py-3" style={styles.wrapper}>
             <h2 className="p-4 text-center text-white" ><u>All Contests</u>({events.length})</h2>
+            <p className="text-light text-center">
+                All contest's time are according to Indian Standard Time(IST).
+            </p>
             <div className="row align-items-center justify-content-around" style={styles.events}>
                 {events.map((e) => {
                     return (
@@ -69,8 +105,16 @@ const Events = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-10 d-flex align-items-center justify-content-center" style={e.platform === "Leetcode" ? { color: '#8B0000' } : {color : 'white'}}>
-                                    <button className="btn btn-primary m-3" onClick={()=> handleclick(e.link)}>View Contest page &#x3e;&#x3e;</button>
+                                <div className="col-10 d-flex flex-column align-items-center justify-content-center" style={e.platform === "Leetcode" ? { color: '#8B0000' } : { color: 'white' }}>
+
+                                    <button className="btn btn-danger m-2" onClick={() => handleContestPage(e.link)} style={styles.button}>
+                                        Contest page &#x3e;&#x3e;
+                                    </button>
+
+                                    <button className="btn btn-primary" style={styles.button} onClick={() => handleGoogleCalendar(e)}>
+                                        <i className="fas fa-calendar px-2"></i>
+                                        Add to Google Calendar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -81,4 +125,4 @@ const Events = (props) => {
     )
 }
 
-export default Events
+export default Events;
