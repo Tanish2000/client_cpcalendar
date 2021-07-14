@@ -35,7 +35,7 @@ span.rbc-toolbar-label {
 
 .rbc-month-view{  
     padding : 5px; 
-    border : none;   
+    border : none !important;   
 }
 
 .rbc-date-cell {
@@ -69,6 +69,18 @@ span.rbc-toolbar-label {
     100% {
       width: 28ch;
     }
+  }
+
+  .sortbtn:active {
+      animation : animation 0.7s ease-in 3;
+      width : 40px;
+      height : 40px;
+  }
+
+  @keyframes animation { 
+    20% {
+        transform : rotate(720deg)
+      }
   }
 
 

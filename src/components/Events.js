@@ -1,7 +1,9 @@
-import React from 'react';
+import { React, useState } from 'react';
 import Codechef from '../images/codechef.svg'
 import Codeforces from '../images/codeforces.png'
-import Leetcode from '../images/leetcode.svg'
+import Leetcode from '../images/leetcode.svg';
+import Sort from '../images/scroll.png';
+import '../App.css';
 
 const Events = (props) => {
 
@@ -32,27 +34,31 @@ const Events = (props) => {
             textDecoration: 'underline',
             color: 'white'
         },
-        button : {
-            boxShadow : 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
+        Button: {
+            boxShadow: 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
+        },
+        sortIcon: {
+            backgroundImage: 'url("https://cdn.codechef.com/sites/all/themes/abessive/images/sort_both.png")',
+            width: '20px',
+            height: '20px',
+            backgroundSize: 'cover'
         }
     }
 
-    const events = props.events;
+    const data = props.events;
+
+    const [Events, setEvents] = useState(data);
+    const [isSorted, setisSorted] = useState(true);
 
     const handleContestPage = (link) => {
         window.open(link, '_blank', 'noopener , noreferrer')
     }
 
-    const handleGoogleCalendar = ({title,start,end,start_time,end_time,link,platform}) => {
+    const handleGoogleCalendar = ({ title, start, end, start_time, end_time, link, platform }) => {
 
         var base_url = "https://calendar.google.com/calendar/u/0/r/eventedit?text=";
-
         var contest_name = title.trim();
-
-        var details = `[${platform}] - ${title}`;
-
-
-
+        var details = `%5B${platform}%5D - ${title}`;
         var start_date = new Date(`${start} ${start_time}`);
         var end_date = new Date(`${end} ${end_time}`);
 
@@ -60,32 +66,49 @@ const Events = (props) => {
         start_date.setMinutes(start_date.getMinutes() + 30);
         end_date.setHours(end_date.getHours() + 5);
         end_date.setMinutes(end_date.getMinutes() + 30);
-
         start_date = start_date.toISOString();
         end_date = end_date.toISOString();
-        
-        start_date = start_date.slice(0,10).replaceAll('-','') +  start_date.slice(10,19).replaceAll(':','')
 
-        end_date = end_date.slice(0,10).replaceAll('-','') +  end_date.slice(10,19).replaceAll(':','');
+        start_date = start_date.slice(0, 10).replaceAll('-', '') + start_date.slice(10, 19).replaceAll(':', '')
+        end_date = end_date.slice(0, 10).replaceAll('-', '') + end_date.slice(10, 19).replaceAll(':', '');
 
-        contest_name = contest_name.replaceAll('#','%23')
+        contest_name = contest_name.replaceAll('#', '%23')
+        details = details.replaceAll('#', '%23')
 
-        var calendar_url = `${base_url}${contest_name}&details=${details}&dates=${start_date}/${end_date}&location=${link}&trp=false&sf=true`;
+        var calendar_url = `${base_url}${contest_name}&location=${link}&details=${details}&dates=${start_date}/${end_date}&trp=false&sf=true`;
 
-        //https://calendar.google.com/calendar/u/0/r/eventedit?text=%5BLeetCode%5D+-+Weekly+Contest+250&details=%5BLeetCode%5D+-+Weekly+Contest+250&dates=20210718T023000Z/20210718T040000Z&location=https://leetcode.com/contest/weekly-contest-250&trp=false&sf=true
+        window.open(calendar_url, '_blank', 'noopener , noreferrer');
+    }
 
-        window.open(calendar_url , '_blank' , 'noopener , noreferrer');
+    const sortUp = (a, b) => {
+        return new Date(`${a.start} ${a.start_time}`).getTime() - new Date(`${b.start} ${b.start_time}`).getTime();
+    }
 
+    const sortDown = (a, b) => {
+        return new Date(`${b.start} ${b.start_time}`).getTime() - new Date(`${a.start} ${a.start_time}`).getTime();
+    }
+
+    const handleUpDownClick = () => {
+        isSorted 
+         ? setEvents([...Events].sort(sortDown))
+         : setEvents([...Events].sort(sortUp))
+
+        setisSorted((prev) => !prev);
     }
 
     return (
         <div className="bg-dark py-3" style={styles.wrapper}>
-            <h2 className="p-4 text-center text-white" ><u>All Contests</u>({events.length})</h2>
+            <div className="d-flex align-items-center justify-content-center p-4">
+                <h2 className="text-white" ><u>All Contests</u>({Events.length})</h2>
+                <span className="bg-transparent" onClick={() => { handleUpDownClick() }}>
+                    <img src={Sort} className="sortbtn" width="35" height="35" alt="UpDown_img" />
+                </span>
+            </div>
             <p className="text-light text-center mx-3">
                 All contest's time are according to Indian Standard Time(IST).
             </p>
             <div className="row align-items-center justify-content-around" style={styles.events}>
-                {events.map((e) => {
+                {Events.map((e) => {
                     return (
                         <div key={e._id} className="col-md-5 col-11 p-3 m-md-2 m-1 shadow-lg rounded" style={{ backgroundColor: e.hex_color }}>
                             <div className="d-flex align-items-center justify-content-center row">
@@ -113,11 +136,11 @@ const Events = (props) => {
                                 </div>
                                 <div className="col-10 d-flex flex-column align-items-center justify-content-center" style={e.platform === "Leetcode" ? { color: '#8B0000' } : { color: 'white' }}>
 
-                                    <button className="btn btn-danger m-2" onClick={() => handleContestPage(e.link)} style={styles.button}>
+                                    <button className="btn btn-danger m-2" onClick={() => handleContestPage(e.link)} style={styles.Button}>
                                         Contest page &#x3e;&#x3e;
                                     </button>
 
-                                    <button className="btn btn-primary" style={styles.button} onClick={() => handleGoogleCalendar(e)}>
+                                    <button className="btn btn-primary" style={styles.Button} onClick={() => handleGoogleCalendar(e)}>
                                         <i className="fas fa-calendar px-2"></i>
                                         Add to Google Calendar
                                     </button>

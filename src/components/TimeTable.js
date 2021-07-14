@@ -8,7 +8,7 @@ import Target from "../images/target.svg";
 import "react-toastify/dist/ReactToastify.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Tags from "./Tags";
-import "../App.css";
+import '../App.css';
 
 const TimeTable = () => {
   const [contests, setContest] = useState([]);

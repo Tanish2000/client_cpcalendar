@@ -18,13 +18,10 @@ const Note = () => {
   };
   const notes = [
     {
-      text: `Contests data get updated automatically after every 5 minutes. Please refresh the page if you can't see the changes.`,
+      text: `Contest's data gets updated automatically after every 15 minutes. Please refresh the page if you can't see the changes.`,
     },
     {
       text: `Please inform immediately if you encounter any bug. It's a scrapping project and needs regular maintenance.`,
-    },
-    {
-      text: `If you want to contribute please ping me on any social media platform, links are given below.`,
     },
   ];
   return (

@@ -16,9 +16,6 @@ const UpcomingFeatures = () => {
       text: `Adding support of different platforms like Hackerearth, Hackerrank, etc.`,
     },
     {
-      text: `Push notifications service for the upcoming contest on differnet platforms.`,
-    },
-    {
       text: `Sending alerts through push notifications 30 minutes prior to the contest. `,
     },
   ];
