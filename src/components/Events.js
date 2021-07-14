@@ -43,11 +43,15 @@ const Events = (props) => {
         window.open(link, '_blank', 'noopener , noreferrer')
     }
 
-    const handleGoogleCalendar = ({title,start,end,start_time,end_time,link}) => {
+    const handleGoogleCalendar = ({title,start,end,start_time,end_time,link,platform}) => {
 
         var base_url = "https://calendar.google.com/calendar/u/0/r/eventedit?text=";
 
-        var contest_name = title.trim().replaceAll(" ","+");
+        var contest_name = title.trim();
+
+        var details = `[${platform}] - ${title}`;
+
+
 
         var start_date = new Date(`${start} ${start_time}`);
         var end_date = new Date(`${end} ${end_time}`);
@@ -66,7 +70,7 @@ const Events = (props) => {
 
         contest_name = contest_name.replaceAll('#','%23')
 
-        var calendar_url = `${base_url}${contest_name}&dates=${start_date}/${end_date}&location=${link}&&pli=1&uid&sf=true&output=xml%23eventpage_6`;
+        var calendar_url = `${base_url}${contest_name}&details=${details}&dates=${start_date}/${end_date}&location=${link}&&pli=1&uid&sf=true&output=xml%23eventpage_6`;
 
         window.open(calendar_url , '_blank' , 'noopener , noreferrer');
 
@@ -75,7 +79,7 @@ const Events = (props) => {
     return (
         <div className="bg-dark py-3" style={styles.wrapper}>
             <h2 className="p-4 text-center text-white" ><u>All Contests</u>({events.length})</h2>
-            <p className="text-light text-center">
+            <p className="text-light text-center mx-3">
                 All contest's time are according to Indian Standard Time(IST).
             </p>
             <div className="row align-items-center justify-content-around" style={styles.events}>
