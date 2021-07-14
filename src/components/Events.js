@@ -70,7 +70,9 @@ const Events = (props) => {
 
         contest_name = contest_name.replaceAll('#','%23')
 
-        var calendar_url = `${base_url}${contest_name}&details=${details}&dates=${start_date}/${end_date}&location=${link}&&pli=1&uid&sf=true&output=xml%23eventpage_6`;
+        var calendar_url = `${base_url}${contest_name}&details=${details}&dates=${start_date}/${end_date}&location=${link}&trp=false&sf=true`;
+
+        //https://calendar.google.com/calendar/u/0/r/eventedit?text=%5BLeetCode%5D+-+Weekly+Contest+250&details=%5BLeetCode%5D+-+Weekly+Contest+250&dates=20210718T023000Z/20210718T040000Z&location=https://leetcode.com/contest/weekly-contest-250&trp=false&sf=true
 
         window.open(calendar_url , '_blank' , 'noopener , noreferrer');
 
