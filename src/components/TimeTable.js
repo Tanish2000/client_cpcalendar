@@ -34,8 +34,8 @@ const TimeTable = () => {
       height: "auto",
       width: "10%",
     },
-    button : {
-      boxShadow : 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
+    button: {
+      boxShadow: 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
     }
   };
 

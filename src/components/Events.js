@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import Codechef from '../images/codechef.svg'
 import Codeforces from '../images/codeforces.png'
 import Leetcode from '../images/leetcode.svg';
-import Sort from '../images/scroll.png';
+import Sort from '../images/sort_btn.png';
 import '../App.css';
 
 const Events = (props) => {
@@ -89,68 +89,75 @@ const Events = (props) => {
     }
 
     const handleUpDownClick = () => {
-        isSorted 
-         ? setEvents([...Events].sort(sortDown))
-         : setEvents([...Events].sort(sortUp))
+        isSorted
+            ? setEvents([...Events].sort(sortDown))
+            : setEvents([...Events].sort(sortUp))
 
         setisSorted((prev) => !prev);
     }
 
     return (
         <div className="bg-dark py-3" style={styles.wrapper}>
-            <div className="d-flex align-items-center justify-content-center p-4">
+            <div className="d-flex align-items-center justify-content-center py-4">
                 <h2 className="text-white" ><u>All Contests</u>({Events.length})</h2>
-                <span className="bg-transparent" onClick={() => { handleUpDownClick() }}>
-                    <img src={Sort} className="sortbtn" width="35" height="35" alt="UpDown_img" />
-                </span>
+                <div className="d-flex flex-row flex-wrap align-items-center justify-centent-center">
+                    <span className="bg-transparent" onClick={() => { handleUpDownClick() }}>
+                        <img src={Sort} className="sortbtn" width="20" height="30" alt="UpDown_img" />
+                    </span>
+                    <span className="text-light text-center" style={{ fontSize: '0.8em' }}>
+                        (Sort by dates)
+                    </span>
+                </div>
             </div>
-            <p className="text-light text-center mx-3">
-                All contest's time are according to Indian Standard Time(IST).
-            </p>
+            <div>
+                <p className="text-light text-center mx-3">
+                    <small>All contest's time are according to Indian Standard Time(IST).</small>
+                </p>
+            </div>
             <div className="row align-items-center justify-content-around" style={styles.events}>
-                {Events.map((e) => {
-                    return (
-                        <div key={e._id} className="col-md-5 col-11 p-3 m-md-2 m-1 shadow-lg rounded" style={{ backgroundColor: e.hex_color }}>
-                            <div className="d-flex align-items-center justify-content-center row">
-                                <div className="col-2">
-                                    <img src={e.platform === "Codechef" ? Codechef : e.platform === "Leetcode" ? Leetcode : Codeforces} style={styles.icon} alt="event" />
-                                </div>
-                                <div className={e.platform === "Leetcode" ? "col-10" : "col-10 text-light"} style={e.platform === "Leetcode" ? { color: '#8B0000' } : {}}>
-                                    <div className="d-flex flex-column">
-                                        <div className="text-center" style={styles.titleBox}>
-                                            <span style={styles.title}>{e.title}</span>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-                                                <span style={{ margin: '4px' }}><u>Start</u></span>
-                                                <span>{e.start}</span>
-                                                <span style={styles.time}>{e.start_time}</span>
+                    {Events.map((e) => {
+                        return (
+                            <div key={e._id} className="event_card col-md-5 col-11 p-3 m-md-2 m-1 shadow-lg rounded" style={{ backgroundColor: e.hex_color }}>
+                                <div className="d-flex align-items-center justify-content-center row">
+                                    <div className="col-2">
+                                        <img src={e.platform === "Codechef" ? Codechef : e.platform === "Leetcode" ? Leetcode : Codeforces} style={styles.icon} alt="event" />
+                                    </div>
+                                    <div className={e.platform === "Leetcode" ? "col-10" : "col-10 text-light"} style={e.platform === "Leetcode" ? { color: '#8B0000' } : {}}>
+                                        <div className="d-flex flex-column">
+                                            <div className="text-center" style={styles.titleBox}>
+                                                <span style={styles.title}>{e.title}</span>
                                             </div>
-                                            <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-                                                <span style={{ margin: '4px' }}><u>End</u></span>
-                                                <span>{e.end}</span>
-                                                <span style={styles.time}>{e.end_time}</span>
+                                            <div className="row">
+                                                <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+                                                    <span style={{ margin: '4px' }}><u>Start</u></span>
+                                                    <span>{e.start}</span>
+                                                    <span style={styles.time}>{e.start_time}</span>
+                                                </div>
+                                                <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+                                                    <span style={{ margin: '4px' }}><u>End</u></span>
+                                                    <span>{e.end}</span>
+                                                    <span style={styles.time}>{e.end_time}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-10 d-flex flex-column align-items-center justify-content-center" style={e.platform === "Leetcode" ? { color: '#8B0000' } : { color: 'white' }}>
+                                    <div className="col-10 d-flex flex-column align-items-center justify-content-center" style={e.platform === "Leetcode" ? { color: '#8B0000' } : { color: 'white' }}>
 
-                                    <button className="btn btn-danger m-2" onClick={() => handleContestPage(e.link)} style={styles.Button}>
-                                        Contest page &#x3e;&#x3e;
-                                    </button>
+                                        <button className="btn btn-danger m-2" onClick={() => handleContestPage(e.link)} style={styles.Button}>
+                                            Contest page &#x3e;&#x3e;
+                                        </button>
 
-                                    <button className="btn btn-primary" style={styles.Button} onClick={() => handleGoogleCalendar(e)}>
-                                        <i className="fas fa-calendar px-2"></i>
-                                        Add to Google Calendar
-                                    </button>
+                                        <button className="btn btn-primary" style={styles.Button} onClick={() => handleGoogleCalendar(e)}>
+                                            <i className="fas fa-calendar px-2"></i>
+                                            Add to Google Calendar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
             </div>
-        </div>
+        </div >
     )
 }
 

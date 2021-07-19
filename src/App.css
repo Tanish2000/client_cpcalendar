@@ -72,15 +72,21 @@ span.rbc-toolbar-label {
   }
 
   .sortbtn:active {
-      animation : animation 0.7s ease-in 3;
+      animation : animation 1s ease-in 3;
       width : 40px;
       height : 40px;
   }
 
   @keyframes animation { 
     20% {
-        transform : rotate(720deg)
+        transform : rotate(360deg)
       }
+  }
+
+
+
+  .event_card { 
+      transition: 0.3s;
   }
 
 
