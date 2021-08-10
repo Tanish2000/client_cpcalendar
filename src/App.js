@@ -11,7 +11,7 @@ function App() {
 
   const styles = {
     main_div: {
-      backgroundColor: 'azure',
+      backgroundImage: ' linear-gradient(to bottom, #edfafb, #f2fbfe, #f8fcff, #fcfdff, #ffffff)',
       margin: '0 !important',
       padding: '0 !important'
     }

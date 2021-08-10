@@ -17,7 +17,12 @@ const Events = (props) => {
         },
         wrapper: {
             fontFamily: `'New Tegomin', serif`,
-            fontSize: '19px'
+            fontSize: '19px',
+            transform: 'skewY(-3deg)',
+            backgroundImage : 'linear-gradient(to bottom, #232426, #202023, #1c1d20, #19191d, #16161a)'
+        },
+        wrapper_skew : {
+            transform: 'skewY(3deg)'
         },
         titleBox: {
             paddingBottom: "8px",
@@ -97,27 +102,28 @@ const Events = (props) => {
     }
 
     return (
-        <div className="bg-dark py-3" style={styles.wrapper}>
-            <div className="d-flex align-items-center justify-content-center py-4">
-                <h2 className="text-white" ><u>All Contests</u>({Events.length})</h2>
-                <div className="d-flex flex-row flex-wrap align-items-center justify-centent-center">
-                    <span className="bg-transparent" onClick={() => { handleUpDownClick() }}>
-                        <img src={Sort} className="sortbtn" width="20" height="30" alt="UpDown_img" />
-                    </span>
-                    <span className="text-light text-center" style={{ fontSize: '0.8em' }}>
-                        (Sort by dates)
-                    </span>
+        <div className="bg-dark py-5" style={styles.wrapper}>
+            <div style={styles.wrapper_skew}>
+                <div className="d-flex align-items-center justify-content-center py-4">
+                    <h2 className="text-white" ><u>All Contests</u>({Events.length})</h2>
+                    <div className="d-flex flex-row flex-wrap align-items-center justify-centent-center">
+                        <span className="bg-transparent" onClick={() => { handleUpDownClick() }}>
+                            <img src={Sort} className="sortbtn" width="20" height="30" alt="UpDown_img" />
+                        </span>
+                        <span className="text-light text-center" style={{ fontSize: '0.8em' }}>
+                            (Sort by dates)
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <p className="text-light text-center mx-3">
-                    <small>All contest's time are according to Indian Standard Time(IST).</small>
-                </p>
-            </div>
-            <div className="row align-items-center justify-content-around" style={styles.events}>
+                <div>
+                    <p className="text-light text-center mx-3">
+                        <small>All contest's time are according to Indian Standard Time(IST).</small>
+                    </p>
+                </div>
+                <div className="row align-items-center justify-content-around" style={styles.events}>
                     {Events.map((e) => {
                         return (
-                            <div key={e._id} className="event_card col-md-5 col-11 p-3 m-md-2 m-1 shadow-lg rounded" style={{ backgroundColor: e.hex_color }}>
+                            <div key={e._id} className="event_card col-md-5 col-11 p-3 m-md-2 m-1 rounded" style={{ backgroundColor: e.hex_color , boxShadow : '0 1rem 3rem rgba(0,0,0,0.6)' }}>
                                 <div className="d-flex align-items-center justify-content-center row">
                                     <div className="col-2">
                                         <img src={e.platform === "Codechef" ? Codechef : e.platform === "Leetcode" ? Leetcode : Codeforces} style={styles.icon} alt="event" />
@@ -156,7 +162,9 @@ const Events = (props) => {
                             </div>
                         );
                     })}
+                </div>
             </div>
+
         </div >
     )
 }
