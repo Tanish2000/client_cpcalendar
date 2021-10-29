@@ -7,35 +7,60 @@ import { ToastContainer, toast } from "react-toastify";
 import Target from "../images/target.svg";
 import "react-toastify/dist/ReactToastify.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import Message_pic from '../images/message.png'
 import Tags from "./Tags";
 import '../App.css';
 
 const TimeTable = () => {
   const [contests, setContest] = useState([]);
-  const [fetchinprogress, setfetchinprogress] = useState(true);
+  const [fetchingprogress, setfetchingprogress] = useState(true);
+  const [email,setEmail] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://api-cpcalendar.herokuapp.com/getContestData`)
+      .get(`http://localhost:5000/getContestData`)
       .then((res) => {
         const contests = res.data.contests;
         setContest(contests);
-        setfetchinprogress(false);
+        setfetchingprogress(false);
       });
   }, []);
 
   const styles = {
     CalenderStyles: {
-      height: 550,
-      width: "88%",
-      margin: "10px auto",
+      height: 560,
+      width: "90%",
+      margin: "5px auto",
     },
     icon: {
       height: "auto",
       width: "10%",
     },
+    icon_email: {
+      height: "auto",
+      width: "35%",
+    },
     button: {
       boxShadow: 'rgba(0,0,0,0.2) 0px 0.5px 10px 2px inset'
+    },
+    email_section: {
+      borderTop: '0px',
+      borderRadius: '5px',
+      transform: 'skewY(-3deg)',
+      boxShadow: '0rem 1rem 2rem rgba(0,0,0,.175)',
+      backgroundImage: 'linear-gradient(to top, #232426, #202023, #1c1d20, #19191d, #16161a)',
+      overflow: 'hidden'
+    },
+    gfont: {
+      fontFamily: `'Rampart One', cursive`,
+      margin: '15px 0px',
+    },
+    innerbox: {
+      transform: 'skewY(3deg)'
+    },
+    description: {
+      fontFamily: `'New Tegomin', serif`,
+      fontSize: '18px',
     }
   };
 
@@ -101,37 +126,73 @@ const TimeTable = () => {
     });
   };
 
+  const handleChange = (e) => {
+    setEmail(e.target.value)
+    console.log(email)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.email)
+  }
+
   const CPCalendar = (props) => {
     return (
-      <div>
-        <Tags contest={props.events} />
-        <Calendar
-          views={["month"]}
-          defaultView={"month"}
-          localizer={localizer}
-          events={props.events}
-          onSelectEvent={(e) => handleSelect(e)}
-          style={styles.CalenderStyles}
-          popup={true}
-          eventPropGetter={(e) => handleBgColor(e)}
-          className="my-4"
-        />
+      <div className="d-flex flex-column">
+        <div className="d-flex row mx-0">
+          <div className="col-md-9 col-12">
+            <Tags contest={props.events} />
+            <Calendar
+              views={["month"]}
+              defaultView={"month"}
+              localizer={localizer}
+              events={props.events}
+              onSelectEvent={(e) => handleSelect(e)}
+              style={styles.CalenderStyles}
+              popup={true}
+              eventPropGetter={(e) => handleBgColor(e)}
+              className="my-4"
+            />
+            <ToastContainer
+              position="bottom-center"
+              autoClose={12000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              className="px-4 px-md-0 py-3 rounded-circle "
+            />
+            <h6 className="text-center p-4 text-muted">
+              Tap / Click on the events in the calander for complete details.
+            </h6>
+          </div>
+          <div className="col-md-3 col-12 p-md-5 p-3 d-flex flex-column align-items-between shadow-lg" style={styles.email_section}>
+            <div style={styles.innerbox}>
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                <img src={Message_pic} alt="email_image" style={styles.icon_email} />
+                <h2 className="text-light" style={styles.gfont}>STAY TUNED</h2>
+              </div>
+              <div className="d-flex flex-column align-items-center py-4">
+                <div className="text-light" style={styles.description}>
+                  <p>Hold On!  Stay with us, as our contests data gets updated every single hour. Please subscribe to our service and never miss a chance to win a contest.</p>
+                </div>
+                <div className="text-light" style={styles.description}>
+                  <p> ⌛ Wait for us in your inbox.</p>
+                </div>
+              </div>
+              <div className="d-flex flex-column align-items-center py-3">
+                <form>
+                  <input name="email" type="email" value={email} onChange={(e)=> handleChange(e)} required />
+                  <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Now</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <ToastContainer
-          position="bottom-center"
-          autoClose={12000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          className="px-4 px-md-0 py-3"
-        />
-        <h6 className="text-center p-4 text-muted">
-          Tap / Click on the events in the calander for complete details.
-        </h6>
         <Events events={props.events} />
       </div>
     );
@@ -156,7 +217,7 @@ const TimeTable = () => {
 
   return (
     <div>
-      {fetchinprogress ? <Spinner /> : <CPCalendar events={contests} />}
+      {fetchingprogress ? <Spinner /> : <CPCalendar events={contests} />}
     </div>
   );
 };
