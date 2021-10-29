@@ -16,7 +16,7 @@ const TimeTable = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api-cpcalendar.herokuapp.com/getContestData`)
+      .get(`https://api-cpcalender.herokuapp.com/getContestData`)
       .then((res) => {
         const contests = res.data.contests;
         setContest(contests);
