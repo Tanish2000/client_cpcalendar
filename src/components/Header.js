@@ -1,6 +1,5 @@
 import React from "react";
-import logoGif from "../images/logo.gif";
-import coding from "../images/html-coding.svg";
+import logoGif from "../images/calendar.png";
 
 const Header = () => {
   const styles = {
@@ -24,16 +23,15 @@ const Header = () => {
         <a className="navbar-brand d-flex align-items-center" href="/">
           <img
             src={logoGif}
-            width="40"
-            height="40"
+            width="50"
+            height="50"
             className="d-inline-block align-top"
             alt=""
           />
           <h1 className="ml-2 mx-1" style={styles.heading}>
-            CP_
+            Cp
           </h1>
-          <img src={coding} alt="" width="30" height="30" className="" />
-          <h1 style={styles.heading}>_Calendar</h1>
+          <h1 style={styles.heading}>Calendar</h1>
         </a>
 
         <div className="d-none d-md-block">

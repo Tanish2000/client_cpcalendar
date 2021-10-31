@@ -1,51 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 
 span.rbc-toolbar-label {
     font-weight: 700;
     text-decoration: underline;
     text-align: center;
-    margin : 10px;
+    margin: 10px;
     font-size: x-large;
 }
 
-.wrapper{
-    min-height : 100vh;
+.wrapper {
+    min-height: 100vh;
 }
 
-.rbc-toolbar  {
+.rbc-toolbar {
     flex-direction: column-reverse;
 }
 
-.rbc-btn-group > button:first-child{
+.rbc-btn-group>button:first-child {
     display: none;
 }
 
-.rbc-btn-group > button {
+.rbc-btn-group>button {
     margin: 10px;
-    font-size : medium;
+    font-size: medium;
     border: 1px solid darkgrey;
     font-weight: 600;
     text-decoration: underline black;
 }
 
-.rbc-header{
-    padding : 5px;
+.rbc-header {
+    padding: 5px;
 }
 
-.rbc-month-view{  
-    padding : 5px; 
-    border : none !important;   
+.rbc-month-view {
+    padding: 5px;
+    border: none !important;
 }
 
 .rbc-date-cell {
-    font-weight : 700;
-    font-size : 15px;
+    font-weight: 700;
+    font-size: 15px;
 }
 
-.container-fluid{
-    padding : 0;
-    margin : 0;
+.container-fluid {
+    padding: 0;
+    margin: 0;
 }
 
 .spinner_text {
@@ -58,36 +59,71 @@ span.rbc-toolbar-label {
 
 @keyframes text_type {
     0% {
-      width: 0ch;
+        width: 0ch;
     }
+
     50% {
-      width: 14ch;
+        width: 14ch;
     }
+
     75% {
-      width: 25ch;
+        width: 25ch;
     }
+
     100% {
-      width: 28ch;
+        width: 28ch;
     }
-  }
+}
 
-  .sortbtn:active {
-      animation : animation 1s ease-in 3;
-      width : 40px;
-      height : 40px;
-  }
+.sortbtn:active {
+    animation: animation 1s ease-in 3;
+    width: 40px;
+    height: 40px;
+}
 
-  @keyframes animation { 
+@keyframes animation {
     20% {
-        transform : rotate(360deg)
-      }
-  }
+        transform: rotate(360deg)
+    }
+}
 
+.event_card {
+    transition: 0.3s;
+}
 
+.email_input{
+    padding : 5px 20px 5px 10px; 
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width : 220px;
+    background-color: #e9edff;
+    border: 4px rgb(95, 61, 248) solid;
+}   
 
-  .event_card { 
-      transition: 0.3s;
-  }
+.email_submit {
+    font-size: 1.3rem;
+    padding : 10px 12px;
+    border : 2px rgb(95, 61, 248) solid;
+    border-radius : 50%;
+    margin-left: -15px;
+    font-family: 'New Tegomin', serif;
+    color : white;
+    font-weight: bold;
+    background-image: linear-gradient(to bottom, #0d0669, #680efa, #3e59f3, #2a76e7, #393c7e);
+}
 
+.links {
+    color:rgb(101, 67, 252);
+    font-size: 18px;
+}
 
+.close_btn {
+    background : transparent;
+    padding : 2px;
+    border : none;
+    margin : 0px 3px;
+}
 
+.close_span {
+    font-size : 22px;   
+}

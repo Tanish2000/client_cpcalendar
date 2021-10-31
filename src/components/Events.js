@@ -102,7 +102,7 @@ const Events = (props) => {
     }
 
     return (
-        <div className="bg-dark py-5" style={styles.wrapper}>
+        <div className="py-5" style={styles.wrapper}>
             <div style={styles.wrapper_skew}>
                 <div className="d-flex align-items-center justify-content-center py-4">
                     <h2 className="text-white" ><u>All Contests</u>({Events.length})</h2>
