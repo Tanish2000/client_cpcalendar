@@ -90,3 +90,40 @@ span.rbc-toolbar-label {
 .event_card {
     transition: 0.3s;
 }
+
+.email_input{
+    padding : 5px 20px 5px 10px; 
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width : 220px;
+    background-color: #e9edff;
+    border: 4px rgb(95, 61, 248) solid;
+}   
+
+.email_submit {
+    font-size: 1.3rem;
+    padding : 10px 12px;
+    border : 2px rgb(95, 61, 248) solid;
+    border-radius : 50%;
+    margin-left: -15px;
+    font-family: 'New Tegomin', serif;
+    color : white;
+    font-weight: bold;
+    background-image: linear-gradient(to bottom, #0d0669, #680efa, #3e59f3, #2a76e7, #393c7e);
+}
+
+.links {
+    color:rgb(101, 67, 252);
+    font-size: 18px;
+}
+
+.close_btn {
+    background : transparent;
+    padding : 2px;
+    border : none;
+    margin : 0px 3px;
+}
+
+.close_span {
+    font-size : 22px;   
+}
