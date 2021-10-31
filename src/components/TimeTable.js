@@ -33,7 +33,7 @@ const TimeTable = () => {
 
   const styles = {
     CalenderStyles: {
-      height: 560,
+      height: '560px',
       width: "90%",
       margin: "5px auto",
     },
@@ -138,7 +138,7 @@ const TimeTable = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAck_message({ status: undefined, message: "" })
-    const res = await fetch('http://localhost:5000/addUser', {
+    const res = await fetch('https://api-cpcalender.herokuapp.com/addUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
