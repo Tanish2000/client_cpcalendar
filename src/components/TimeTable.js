@@ -19,10 +19,22 @@ const TimeTable = () => {
     status: undefined,
     message: ""
   })
+  //Creating two seperate servers for load balancing
+  const url_1 = "https://api-cpcalendar.herokuapp.com/getContestData";
+  const url_2 = "https://api-cpcalender.herokuapp.com/getContestData";
+
 
   useEffect(() => {
+    
+    let date =  new Date().getDate(); // Today's Date
+    
+    //Dividing load on two servers
+    let main_url = url_1;
+    if(date <= 15)
+      main_url = url_2;
+
     axios
-      .get(`https://api-cpcalender.herokuapp.com/getContestData`)
+      .get(main_url)
       .then((res) => {
         const contests = res.data.contests;
         setContest(contests);
@@ -50,7 +62,7 @@ const TimeTable = () => {
     },
     email_section: {
       borderTop: '0px',
-      marginBottom : '-3px',
+      marginBottom: '-3px',
       transform: 'skewY(-3deg)',
       boxShadow: '0rem 1rem 2rem rgba(0,0,0,.175)',
       backgroundImage: 'linear-gradient(to top, #232426, #202023, #1c1d20, #19191d, #16161a)',
@@ -132,7 +144,7 @@ const TimeTable = () => {
   };
 
   const handleClose = (e) => {
-    setAck_message({ status : undefined , message : ""})
+    setAck_message({ status: undefined, message: "" })
   }
 
   const handleSubmit = async (e) => {
@@ -220,7 +232,7 @@ const TimeTable = () => {
                     <span className="text-light">{ack_message.message}</span>
                     <button className="close_btn" onClick={handleClose}>
                       <span className="text-white close_span">&times;</span>
-                    </button> 
+                    </button>
                   </div>
                 }
               </div>
