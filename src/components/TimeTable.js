@@ -19,10 +19,11 @@ const TimeTable = () => {
     status: undefined,
     message: ""
   })
+
   //Creating two seperate servers for load balancing
   const url_1 = "https://api-cpcalendar.herokuapp.com/getContestData";
   const url_2 = "https://api-cpcalender.herokuapp.com/getContestData";
-
+  
 
   useEffect(() => {
     
@@ -30,7 +31,7 @@ const TimeTable = () => {
     
     //Dividing load on two servers
     let main_url = url_1;
-    if(date <= 15)
+    if(date >= 15)
       main_url = url_2;
 
     axios
