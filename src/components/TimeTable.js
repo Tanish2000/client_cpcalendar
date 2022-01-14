@@ -7,9 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import Target from "../images/target.svg";
 import "react-toastify/dist/ReactToastify.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import Message_pic from '../images/message.png'
 import Tags from "./Tags";
 import '../App.css';
+import Reminder from "./Reminder";
 
 const TimeTable = () => {
   const [contests, setContest] = useState([]);
@@ -20,22 +20,23 @@ const TimeTable = () => {
     message: ""
   })
 
-  //Creating two seperate servers for load balancing
-  const url_1 = "https://api-cpcalendar.herokuapp.com/getContestData";
-  const url_2 = "https://api-cpcalender.herokuapp.com/getContestData";
+  const getBaseUrl = () => {
+    //Dividing load on two servers
+    //Creating two seperate servers for load balancing
+    const BaseUrl01 = "https://api-cpcalendar.herokuapp.com/";
+    const BaseUrl02 = "https://api-cpcalender.herokuapp.com/";
+
+    let date =  new Date().getDate(); // Today's Date
+    if(date >= 15)
+      return BaseUrl02;
+    else
+      return BaseUrl01;
+  }
   
 
   useEffect(() => {
-    
-    let date =  new Date().getDate(); // Today's Date
-    
-    //Dividing load on two servers
-    let main_url = url_1;
-    if(date >= 15)
-      main_url = url_2;
-
     axios
-      .get(main_url)
+      .get(getBaseUrl() + "getContestData")
       .then((res) => {
         const contests = res.data.contests;
         setContest(contests);
@@ -79,6 +80,10 @@ const TimeTable = () => {
     description: {
       fontFamily: `'New Tegomin', serif`,
       fontSize: '18px',
+    },
+    SMIcons: {
+      fontSize: "25px",
+      color: "white",
     }
   };
 
@@ -144,14 +149,14 @@ const TimeTable = () => {
     });
   };
 
-  const handleClose = (e) => {
+  const handleClose = () => {
     setAck_message({ status: undefined, message: "" })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAck_message({ status: undefined, message: "" })
-    const res = await fetch('https://api-cpcalender.herokuapp.com/addUser', {
+    const res = await fetch(getBaseUrl() + 'addUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -201,48 +206,14 @@ const TimeTable = () => {
               Tap / Click on the events in the calander for complete details.
             </h6>
           </div>
-          <div className="col-md-3 col-12 p-md-4 p-4 d-flex flex-column align-items-end shadow-lg" style={styles.email_section}>
-            <div style={styles.innerbox}>
-              <div className="d-flex flex-column justify-content-center align-items-center">
-                <img src={Message_pic} alt="email_image" style={styles.icon_email} />
-                <h2 className="text-light" style={styles.gfont}>STAY TUNED</h2>
-              </div>
-              <div className="d-flex flex-column align-items-center justify-content-center py-4">
-                <div className="text-light text-center" style={styles.description}>
-                  <p>Hold On!  Stay with us, as our contests data gets updated every single hour. Please subscribe to our service and never miss a chance to win a contest.</p>
-                </div>
-                <div className="text-light" style={styles.description}>
-                  <p> ⌛ Wait for us in your inbox.</p>
-                </div>
-              </div>
-              <div className="d-flex flex-column align-items-center justify-content-center py-2">
-                <form onSubmit={handleSubmit}>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="email_input" placeholder="Your Email" required />
-                  <input type="submit" className="email_submit" value="Go" />
-                </form>
-                {ack_message.status === 200 &&
-                  <div className="border border-success bg-success rounded p-1 m-2">
-                    <span className="text-light m-1">{ack_message.message}</span>
-                    <button className="close_btn" onClick={handleClose}>
-                      <span className="text-white close_span" >&times;</span>
-                    </button>
-                  </div>
-                }
-                {(ack_message.status === 403 || ack_message.status === 500) &&
-                  <div className="border border-danger bg-danger rounded p-1 m-2">
-                    <span className="text-light">{ack_message.message}</span>
-                    <button className="close_btn" onClick={handleClose}>
-                      <span className="text-white close_span">&times;</span>
-                    </button>
-                  </div>
-                }
-              </div>
-              <div className="d-flex align-items-center justify-content-center py-2">
-                <a href="/unsubscribe" className="m-2 links">Unsubscribe</a>
-                <a href="/contribute" className="m-2 links">Contribute</a>
-              </div>
-            </div>
-          </div>
+          <Reminder 
+            styles={styles}
+            handleSubmit={handleSubmit}
+            email={email}
+            setEmail={setEmail}
+            ack_message={ack_message}
+            handleClose={handleClose}
+          />
         </div>
         <Events events={props.events} />
       </div>
