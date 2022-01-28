@@ -1,13 +1,16 @@
-import React from 'react'
+import React , {useState} from 'react'
 import Header from './components/Header';
 import TimeTable from './components/TimeTable';
 import Aboutme from './components/Aboutme';
 import Note from './components/Note';
 import UpcomingFeatures from './components/UpcomingFeatures';
 import Goal from './components/Goal';
+import ExtensionModal from './components/ExtensionModal'
 import './App.css';
 
 function App() {
+
+  const [modal, setModal] = useState(false);
 
   const styles = {
     main_div: {
@@ -21,7 +24,8 @@ function App() {
   return (
     <div className="container-fluid" style={styles.main_div}>
       <Header />
-      <TimeTable />
+      <ExtensionModal modal={modal} setModal={setModal}/>
+      <TimeTable setModal={setModal}/>
       <Goal />
       <div className="d-flex row mx-0 flex-wrap align-items-center justify-content-around">
         <div className="col-12 col-xl-6">

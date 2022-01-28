@@ -1,7 +1,6 @@
 import React from "react";
 import TanishAvatar from "../images/avatar.jpg";
 import VinayakAvatar from '../images/Vinayak_Avatar.jpeg';
-import MuskanAvatar from '../images/Muskan_Avatar.jpeg';
 import Heart from "../images/hearts.svg";
 import logoGif from "../images/calendar.png";
 
@@ -42,10 +41,6 @@ const Aboutme = () => {
       src: VinayakAvatar,
       profileLink: 'https://www.linkedin.com/in/vinayak-sharma-b94161190/'
     },
-    {
-      src: MuskanAvatar,
-      profileLink: 'https://www.linkedin.com/in/muskan-kushwah-a44143204/'
-    },
   ]
   return (
     <div className="bg-dark mt-md-2">
@@ -58,23 +53,14 @@ const Aboutme = () => {
             {
               Avatars.map((Avatar, index) => {
                 return (
-                  <a href={Avatar.profileLink} target="_blank" rel="noreferrer" >
-                    <img src={Avatar.src} key={index} alt="" style={styles.img} className="m-2 mx-md-3" />
+                  <a href={Avatar.profileLink} target="_blank" rel="noreferrer" key={index} >
+                    <img src={Avatar.src}  alt="avatar" style={styles.img} className="m-2 mx-md-3" />
                   </a>
                 )
 
               })
             }
           </div>
-
-          {/* <div>
-            <h4 className="text-white text-center" style={styles.text}>
-              Tanish Singh Chouhan
-            </h4>
-            <p className="text-white text-center" style={styles.text}>
-              Geek | Web Enthusiast
-            </p>
-          </div> */}
         </div>
         <div className="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-3 m-md-0">
           <div>

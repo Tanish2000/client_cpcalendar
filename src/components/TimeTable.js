@@ -11,7 +11,7 @@ import Tags from "./Tags";
 import '../App.css';
 import Reminder from "./Reminder";
 
-const TimeTable = () => {
+const TimeTable = ({setModal}) => {
   const [contests, setContest] = useState([]);
   const [fetchingprogress, setfetchingprogress] = useState(true);
   const [email, setEmail] = useState("");
@@ -213,6 +213,7 @@ const TimeTable = () => {
             setEmail={setEmail}
             ack_message={ack_message}
             handleClose={handleClose}
+            setModal={setModal}
           />
         </div>
         <Events events={props.events} />
