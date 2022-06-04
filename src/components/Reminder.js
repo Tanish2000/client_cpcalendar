@@ -2,7 +2,7 @@ import React from 'react'
 import Message_pic from '../images/message.png'
 
 
-const Reminder = ({ styles, handleSubmit, email, setEmail, ack_message, handleClose }) => {
+const Reminder = ({ styles, handleSubmit, email, setEmail, ack_message, handleClose , setModal }) => {
   return (
     <div className="col-md-3 col-12 p-md-4 p-4 d-flex flex-column align-items-end shadow-lg" style={styles.email_section}>
       <div style={styles.innerbox}>
@@ -41,10 +41,15 @@ const Reminder = ({ styles, handleSubmit, email, setEmail, ack_message, handleCl
           }
         </div>
         <div className="d-flex align-items-center justify-content-center py-2">
-          <button className='btn btn-primary p-1'>
+          <button className='btn btn-outline-primary p-1 mx-1'>
             <a href="https://github.com/Tanish2000/cpcalendar" target="_blank" rel="noreferrer" className="text-light text-decoration-none">
             <i style={styles.SMIcons} className="fab fa-github m-1"></i>
               Contribute</a>
+          </button>
+          <button 
+            className='btn btn-outline-primary p-2 my-2 text-white'
+            onClick={() => setModal(true)}>
+            Try out Browser Extension
           </button>
         </div>
       </div>
